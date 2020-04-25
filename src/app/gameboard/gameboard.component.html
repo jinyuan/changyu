@@ -1,0 +1,31 @@
+<div class="container">
+  <div class="card bg-light mt-5">
+    <div class="card-header">
+      <h5 class="float-left"><fa-icon [icon]="['fas', 'clipboard']"></fa-icon> {{score}}</h5>
+      <h5 class="float-right"><fa-icon [icon]="['fas', 'stopwatch']"></fa-icon> {{secondsRemaining}}</h5>
+    </div>
+    <div class="card-body">
+      <div class="row" *ngFor="let row of gamePieces; i as index">
+        <div class="col-3 p-0" *ngFor="let gamePiece of row">
+          <app-gamepiece [data]="gamePiece" (clickEvent)="pieceClick($event)"></app-gamepiece>
+        </div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <div class="btn-group btn-group-sm btn-group-toggle float-left" data-toggle="buttons">
+        <label class="btn btn-secondary" *ngFor="let difficulty of difficulties"
+        [ngClass]="{
+        'active': selectedDifficulty == difficulty
+        }">
+          <input type="radio" name="difficulty"
+                 [value]="difficulty"
+                 [(ngModel)]="selectedDifficulty" (change)="onDifficultyChange()">
+          {{difficulty.name}}
+        </label>
+      </div>
+      <button class="btn btn-sm btn-danger float-right" (click)="resetGame()">Reset</button>
+    </div>
+  </div>
+
+</div>
+

@@ -1,0 +1,11 @@
+<button type="button" class="btn btn-lg btn-block border-dark"
+      [disabled]="data.disabled"
+      (click)="onClick($event)"
+      [ngClass]="{
+        'btn-primary': data.selected,
+        'btn-light': !data.selected && !data.disabled,
+        'btn-success': data.disabled
+      }"
+>
+  {{data.character}}
+</button>

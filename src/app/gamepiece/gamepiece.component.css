@@ -1,0 +1,9 @@
+.btn:focus {
+  outline: none !important;
+  box-shadow: 0 0 0 0;
+}
+
+.btn-outline-secondary:hover {
+  cursor: default;
+  color: white !important;
+}
