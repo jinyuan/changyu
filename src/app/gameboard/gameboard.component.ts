@@ -1,35 +1,54 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {Idiom} from "../models/Idiom";
 import {IdiomsService} from "../providers/idioms.service";
 import {interval, Subscription} from "rxjs";
 import {GamePiece} from "../models/GamePiece";
 import {Difficulty} from "../models/Difficulty";
-import {faClipboard, faStopwatch} from "@fortawesome/free-solid-svg-icons";
+import {faClipboard, faInfo, faStopwatch} from "@fortawesome/free-solid-svg-icons";
 import {FaIconLibrary} from "@fortawesome/angular-fontawesome";
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import {faGithub} from "@fortawesome/free-brands-svg-icons";
 
 @Component({
   selector: 'app-gameboard',
   templateUrl: './gameboard.component.html',
   styleUrls: ['./gameboard.component.css']
 })
-export class GameboardComponent implements OnInit {
+export class GameboardComponent implements OnInit, AfterViewInit{
 
-  constructor(private library: FaIconLibrary, private idiomService: IdiomsService) {
+  constructor(private library: FaIconLibrary,
+              private idiomService: IdiomsService,
+              private modalService: BsModalService,
+              ) {
     library.addIcons(
       faStopwatch,
       faClipboard,
+      faInfo,
+      faGithub,
     );
   }
+
+  ngAfterViewInit(): void {
+    if (localStorage.getItem('page.visited') !== 'true') {
+      localStorage.setItem('page.visited','true');
+      this.openModal(this.helpModal);
+    }
+  }
+
   idioms: Map<string, Idiom>;
   gamePieces: Array<Array<GamePiece>>;
   selectedPieces = [];
   score: number = 0;
   gameStarted = false;
   timer: Subscription;
-
   difficulties: Array<Difficulty>;
   selectedDifficulty: Difficulty;
   secondsRemaining:number = 0;
+  modalRef: BsModalRef | null;
+
+  @ViewChild('gameEndModal') gameEndModal: TemplateRef<any>;
+  @ViewChild('helpModal') helpModal: TemplateRef<any>;
+
 
   ngOnInit(): void {
     this.idiomService.getDifficulties().subscribe((data) => {
@@ -109,6 +128,7 @@ export class GameboardComponent implements OnInit {
   }
 
   startGame() {
+    this.populateBoard()
     this.gameStarted = true;
     this.secondsRemaining = this.selectedDifficulty.timeLimit;
     this.timer = interval(1000).subscribe((i) => {
@@ -119,8 +139,7 @@ export class GameboardComponent implements OnInit {
   stopGame() {
     this.gameStarted = false;
     this.timer.unsubscribe();
-    const message = this.selectedDifficulty.numOfIdioms === this.score? 'You won!': 'Game over!';
-    alert(message);
+    this.openModal(this.gameEndModal);
   }
 
   resetGame() {
@@ -161,5 +180,9 @@ export class GameboardComponent implements OnInit {
 
   onDifficultyChange() {
     this.resetGame();
+  }
+
+  openModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template);
   }
 }

@@ -8,6 +8,7 @@ import { GameboardComponent } from './gameboard/gameboard.component';
 import { GamepieceComponent } from './gamepiece/gamepiece.component';
 import {FormsModule} from "@angular/forms";
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import {ModalModule} from "ngx-bootstrap/modal";
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     BrowserAnimationsModule,
     FormsModule,
     FontAwesomeModule,
+    ModalModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

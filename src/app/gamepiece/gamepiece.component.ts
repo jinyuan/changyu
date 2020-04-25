@@ -9,6 +9,7 @@ import {GamePiece} from "../models/GamePiece";
 export class GamepieceComponent implements OnInit {
   @Input() data: GamePiece;
   @Output() clickEvent = new EventEmitter<GamePiece>();
+  @Input() gameStarted;
   constructor() { }
 
   ngOnInit(): void {

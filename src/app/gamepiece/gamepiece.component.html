@@ -7,5 +7,6 @@
         'btn-success': data.disabled
       }"
 >
-  {{data.character}}
+  <span *ngIf="gameStarted">{{data.character}}</span>
+  <span *ngIf="!gameStarted">***</span>
 </button>
