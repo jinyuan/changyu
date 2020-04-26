@@ -1,4 +1,16 @@
+
 <div class="container">
+  <div class="card mt-2" *ngIf="debug">
+    <div class="card-header">
+      <h5>Solution</h5>
+    </div>
+    <div class="card-body">
+      <ng-container *ngFor="let idiom of idioms.keys()">
+        {{idiom}}
+      </ng-container>
+    </div>
+</div>
+
   <div class="card bg-light mt-5">
     <div class="card-header">
       <h5 class="float-left"><fa-icon [icon]="['fas', 'clipboard']"></fa-icon> {{score}}/{{selectedDifficulty.numOfIdioms}}</h5>

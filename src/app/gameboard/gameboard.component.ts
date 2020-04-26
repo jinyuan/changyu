@@ -8,6 +8,7 @@ import {faClipboard, faInfo, faStopwatch} from "@fortawesome/free-solid-svg-icon
 import {FaIconLibrary} from "@fortawesome/angular-fontawesome";
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import {faGithub} from "@fortawesome/free-brands-svg-icons";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-gameboard',
@@ -19,6 +20,7 @@ export class GameboardComponent implements OnInit, AfterViewInit{
   constructor(private library: FaIconLibrary,
               private idiomService: IdiomsService,
               private modalService: BsModalService,
+              private route: ActivatedRoute
               ) {
     library.addIcons(
       faStopwatch,
@@ -45,7 +47,7 @@ export class GameboardComponent implements OnInit, AfterViewInit{
   selectedDifficulty: Difficulty;
   secondsRemaining:number = 0;
   modalRef: BsModalRef | null;
-
+  debug = false;
   @ViewChild('gameEndModal') gameEndModal: TemplateRef<any>;
   @ViewChild('helpModal') helpModal: TemplateRef<any>;
 
@@ -61,27 +63,30 @@ export class GameboardComponent implements OnInit, AfterViewInit{
         this.stopGame();
       }
     });
+    this.route.queryParams.subscribe(params => {
+      this.debug = params['debug'] === 'true';
+    });
   }
 
   pieceClick(gamePiece: GamePiece){
     if (!this.gameStarted) {
       this.startGame();
-    }
+    }else {
+      if (this.selectedPieces.length < 1) {
+        gamePiece.selected = true;
+        this.selectedPieces.push(gamePiece);
 
-    if (this.selectedPieces.length < 1) {
-      gamePiece.selected = true;
-      this.selectedPieces.push(gamePiece);
+      } else if (this.selectedPieces.length === 1) {
+        const previousPiece = this.selectedPieces.pop();
 
-    } else if (this.selectedPieces.length === 1) {
-      const previousPiece = this.selectedPieces.pop();
-
-      if (previousPiece == gamePiece){
-        gamePiece.selected = false;
-      }else{
-        this.swapPieces(previousPiece, gamePiece);
-        previousPiece.selected = false;
-        gamePiece.selected = false;
-        this.validateBoard();
+        if (previousPiece == gamePiece){
+          gamePiece.selected = false;
+        }else{
+          this.swapPieces(previousPiece, gamePiece);
+          previousPiece.selected = false;
+          gamePiece.selected = false;
+          this.validateBoard();
+        }
       }
     }
   }
@@ -147,6 +152,7 @@ export class GameboardComponent implements OnInit, AfterViewInit{
     this.gameStarted = false;
     this.secondsRemaining = this.selectedDifficulty.timeLimit;
     this.score = 0;
+    this.selectedPieces = [];
     this.populateBoard();
   }
 
