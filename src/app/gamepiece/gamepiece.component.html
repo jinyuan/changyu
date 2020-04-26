@@ -7,9 +7,9 @@
         'btn-success': data.disabled
       }"
 >
-  <span *ngIf="gameStarted">
-    {{data.character}}<br/>
-    <small class="text-muted">{{data.pinyin}}</small>
-  </span>
+  <div *ngIf="gameStarted">
+    <span>{{data.character}}</span><br/>
+    <small class="text-muted" style="font-size: xx-small">{{data.pinyin}}</small>
+  </div>
   <span *ngIf="!gameStarted">***</span>
 </button>
