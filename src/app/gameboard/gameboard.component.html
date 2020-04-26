@@ -35,10 +35,14 @@
         </label>
       </div>
       <button class="btn btn-sm btn-primary float-right" (click)="openModal(helpModal)">
-        <fa-icon [icon]="['fas', 'info']"></fa-icon>
+        <fa-icon [icon]="['fas', 'info-circle']"></fa-icon>
       </button>
-      <button class="btn btn-sm btn-danger float-right" (click)="resetGame()">Reset</button>
-      <button class="btn btn-sm btn-success float-right" (click)="startGame()" *ngIf="!gameStarted">Start</button>
+      <button class="btn btn-sm btn-danger float-right" (click)="resetGame()">
+        <fa-icon [icon]="['fas', 'sync-alt']"></fa-icon>
+      </button>
+      <button class="btn btn-sm btn-success float-right" (click)="startGame()" *ngIf="!gameStarted">
+        <fa-icon [icon]="['fas', 'play']"></fa-icon>
+      </button>
     </div>
   </div>
 
