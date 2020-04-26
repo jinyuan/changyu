@@ -8,8 +8,10 @@
       }"
 >
   <div *ngIf="gameStarted">
-    <span>{{data.character}}</span><br/>
-    <small class="text-muted" style="font-size: xx-small">{{data.pinyin}}</small>
+    <p class="mb-0">{{data.character}}</p>
+    <p class="m-0">
+      <small class="text-muted mt-0" style="font-size: xx-small">{{data.pinyin}}</small>
+    </p>
   </div>
-  <span *ngIf="!gameStarted">***</span>
+  <p *ngIf="!gameStarted">***</p>
 </button>
