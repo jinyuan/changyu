@@ -1,4 +1,6 @@
-# ChengyuGame
+# Chengyu (成语重组)
+
+Play it now at : [https://jinyuan.github.io/chengyu/](https://jinyuan.github.io/chengyu/)
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.1.
 
