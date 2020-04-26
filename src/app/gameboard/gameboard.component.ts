@@ -92,9 +92,12 @@ export class GameboardComponent implements OnInit, AfterViewInit{
   }
 
   swapPieces(piece1:GamePiece, piece2: GamePiece) {
-    const tmp = piece1.character;
+    const tmpCharacter = piece1.character;
+    const tmpPinyin = piece1.pinyin;
     piece1.character = piece2.character;
-    piece2.character = tmp;
+    piece1.pinyin = piece2.pinyin;
+    piece2.character = tmpCharacter;
+    piece2.pinyin = tmpPinyin;
   }
 
   populateBoard() {
