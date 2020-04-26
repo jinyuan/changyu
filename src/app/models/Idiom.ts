@@ -1,12 +1,16 @@
 class Idiom {
 
   private characters: Array<string>;
+  private pinyins: Array<string>;
   private idiom: string;
+  private pinyin: string;
 
-  constructor(idiom: string) {
+  constructor(idiom: string, pinyin: string) {
     if(idiom.length !== 4) { throw new Error("invalid idiom length"); }
     this.idiom = idiom.normalize();
+    this.pinyin = pinyin;
     this.characters = idiom.split('');
+    this.pinyins = pinyin.split(' ');
   }
 
   public equals(obj: Idiom): boolean {
@@ -15,6 +19,10 @@ class Idiom {
 
   public getCharacters(): Array<string> {
     return this.characters;
+  }
+
+  public getPinyins(): Array<string> {
+    return this.pinyins;
   }
 
   public toString(): string {

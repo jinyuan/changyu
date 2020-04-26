@@ -106,7 +106,7 @@ export class GameboardComponent implements OnInit, AfterViewInit{
         Promise.all(data.map(idiom => {
           pieces = pieces.concat(
             idiom.getCharacters()
-              .map(char => new GamePiece(char))
+              .map((x,i) => new GamePiece(x, idiom.getPinyins()[i]))
           )
         })).then(()=> {
           this.shuffle(pieces);

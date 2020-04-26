@@ -17,7 +17,7 @@
       <h5 class="float-right"><fa-icon [icon]="['fas', 'stopwatch']"></fa-icon> {{secondsRemaining}}</h5>
     </div>
     <div class="card-body">
-      <div class="row card-body"*ngFor="let row of gamePieces; index as i ">
+      <div class="row card-body pt-2 pb-2"*ngFor="let row of gamePieces; index as i ">
         <div class="col-3 p-0" *ngFor="let gamePiece of row">
           <app-gamepiece [data]="gamePiece" [gameStarted]="gameStarted" (clickEvent)="pieceClick($event)"></app-gamepiece>
         </div>
