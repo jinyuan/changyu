@@ -138,17 +138,17 @@ export class GameboardComponent implements OnInit, AfterViewInit{
   }
 
   startGame() {
-    this.populateBoard()
+    this.resetGame()
     this.gameStarted = true;
-    this.secondsRemaining = this.selectedDifficulty.timeLimit;
     this.timer = interval(1000).subscribe((i) => {
       this.secondsRemaining-=1;
     });
   }
 
   stopGame() {
-    this.gameStarted = false;
     this.timer.unsubscribe();
+    this.gameStarted = false;
+    this.gamePieces.forEach(rows => rows.forEach(tile => tile.selected = false));
     this.openModal(this.gameEndModal);
   }
 
