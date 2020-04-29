@@ -13,14 +13,14 @@
   <div class="card bg-light mt-5">
     <div class="card-header">
       <div class="btn-group btn-group-sm btn-group-toggle float-left" data-toggle="buttons">
-        <label class="btn btn-secondary" *ngFor="let lang of translate.getLangs()"
+        <label class="btn btn-secondary" *ngFor="let lang of supportedLangs"
                [ngClass]="{
         'active': selectedLang == lang
         }">
           <input type="radio" name="lang"
                  [value]="lang"
                  [(ngModel)]="selectedLang"
-                 (ngModelChange)="translate.use($event)">
+                 (ngModelChange)="switchLanguage($event)">
           {{lang}}
         </label>
       </div>

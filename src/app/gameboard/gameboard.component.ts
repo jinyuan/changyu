@@ -202,4 +202,8 @@ export class GameboardComponent implements OnInit, AfterViewInit{
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template);
   }
+
+  switchLanguage(lang) {
+    this.translate.use(lang);
+  }
 }
