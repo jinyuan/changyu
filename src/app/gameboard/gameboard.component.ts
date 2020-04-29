@@ -9,6 +9,7 @@ import {FaIconLibrary} from "@fortawesome/angular-fontawesome";
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import {faGithub} from "@fortawesome/free-brands-svg-icons";
 import {ActivatedRoute} from "@angular/router";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-gameboard',
@@ -20,7 +21,8 @@ export class GameboardComponent implements OnInit, AfterViewInit{
   constructor(private library: FaIconLibrary,
               private idiomService: IdiomsService,
               private modalService: BsModalService,
-              private route: ActivatedRoute
+              private route: ActivatedRoute,
+              private translate: TranslateService
               ) {
     library.addIcons(
       faStopwatch,
@@ -30,6 +32,9 @@ export class GameboardComponent implements OnInit, AfterViewInit{
       faSyncAlt,
       faInfoCircle,
     );
+    this.selectedLang = translate.getBrowserLang();
+    translate.setDefaultLang(this.selectedLang);
+    translate.addLangs(this.supportedLangs);
   }
 
   ngAfterViewInit(): void {
@@ -38,7 +43,8 @@ export class GameboardComponent implements OnInit, AfterViewInit{
       this.openModal(this.helpModal);
     }
   }
-
+  selectedLang: string;
+  supportedLangs = ['en', 'zh'];
   idioms: Map<string, Idiom>;
   gamePieces: Array<Array<GamePiece>>;
   selectedPieces = [];

@@ -278,9 +278,9 @@ export class IdiomsService {
     getDifficulties():Observable<Array<Difficulty>> {
       const difficulties = new Array<Difficulty>();
       difficulties.push(
-        new Difficulty('Easy', 4, 180,0, 79),
-        new Difficulty('Normal', 4, 120,80, 159),
-        new Difficulty('Hard', 6, 120, 160, 249),
+        new Difficulty('easy', 4, 180,0, 79),
+        new Difficulty('normal', 4, 120,80, 159),
+        new Difficulty('hard', 6, 120, 160, 249),
       );
       return of(difficulties);
     }

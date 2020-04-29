@@ -1,0 +1,14 @@
+{
+  "howto": {
+    "title": "How to play the game ?",
+    "point1": "Choose your difficulty level",
+    "point2": "Tap on the start button or any tile to start",
+    "point3": "Select two tiles to swap the characters to form idioms",
+    "point4": "Tap on the same tile to unselect"
+  },
+  "difficulty": {
+    "easy": "Easy",
+    "normal": "Normal",
+    "hard": "Hard"
+  }
+}

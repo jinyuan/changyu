@@ -9,6 +9,13 @@ import { GamepieceComponent } from './gamepiece/gamepiece.component';
 import {FormsModule} from "@angular/forms";
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {ModalModule} from "ngx-bootstrap/modal";
+import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
+import {HttpClient, HttpClientModule} from "@angular/common/http";
+import {TranslateHttpLoader} from "@ngx-translate/http-loader";
+
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}
 
 @NgModule({
   declarations: [
@@ -22,7 +29,17 @@ import {ModalModule} from "ngx-bootstrap/modal";
     BrowserAnimationsModule,
     FormsModule,
     FontAwesomeModule,
-    ModalModule.forRoot()
+    HttpClientModule,
+    ModalModule.forRoot(),
+    TranslateModule.forRoot(
+      {
+        loader: {
+          provide: TranslateLoader,
+          useFactory: HttpLoaderFactory,
+          deps: [HttpClient]
+        }
+      }
+    ),
   ],
   providers: [],
   bootstrap: [AppComponent]

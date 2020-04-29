@@ -8,30 +8,46 @@
         {{idiom}}
       </ng-container>
     </div>
-</div>
+  </div>
 
   <div class="card bg-light mt-5">
     <div class="card-header">
-      <h5 class="float-left"><fa-icon [icon]="['fas', 'clipboard']"></fa-icon> {{score}}/{{selectedDifficulty.numOfIdioms}}</h5>
-      <h5 class="float-right"><fa-icon [icon]="['fas', 'stopwatch']"></fa-icon> {{secondsRemaining}}</h5>
+      <div class="btn-group btn-group-sm btn-group-toggle float-left" data-toggle="buttons">
+        <label class="btn btn-secondary" *ngFor="let lang of translate.getLangs()"
+               [ngClass]="{
+        'active': selectedLang == lang
+        }">
+          <input type="radio" name="lang"
+                 [value]="lang"
+                 [(ngModel)]="selectedLang"
+                 (ngModelChange)="translate.use($event)">
+          {{lang}}
+        </label>
+      </div>
+      <h5 class="float-right">
+        <fa-icon [icon]="['fas', 'clipboard']"></fa-icon>
+        {{score}}/{{selectedDifficulty.numOfIdioms}}
+        <fa-icon [icon]="['fas', 'stopwatch']"></fa-icon>
+        {{secondsRemaining}}</h5>
     </div>
     <div class="card-body">
       <div class="row card-body p-2" *ngFor="let row of gamePieces; index as i ">
         <div class="col-3 p-0" *ngFor="let gamePiece of row">
-          <app-gamepiece [data]="gamePiece" [gameStarted]="gameStarted" (clickEvent)="pieceClick($event)"></app-gamepiece>
+          <app-gamepiece [data]="gamePiece" [gameStarted]="gameStarted"
+                         (clickEvent)="pieceClick($event)"></app-gamepiece>
         </div>
       </div>
     </div>
     <div class="card-footer">
       <div class="btn-group btn-group-sm btn-group-toggle float-left" data-toggle="buttons">
         <label class="btn btn-secondary" *ngFor="let difficulty of difficulties"
-        [ngClass]="{
+               [ngClass]="{
         'active': selectedDifficulty == difficulty
         }">
           <input type="radio" name="difficulty"
                  [value]="difficulty"
                  [(ngModel)]="selectedDifficulty" (change)="onDifficultyChange()">
-          {{difficulty.name}}
+          {{'difficulty.' + difficulty.name | translate}}
         </label>
       </div>
       <button class="btn btn-sm btn-primary float-right" (click)="openModal(helpModal)">
@@ -70,7 +86,7 @@
   <ng-template #helpModal>
     <div class="modal-header">
       <h5 class="modal-title">
-        How to play the game ?
+        {{ "howto.title" | translate}}
       </h5>
       <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
         <span aria-hidden="true">&times;</span>
@@ -78,15 +94,16 @@
     </div>
     <div class="modal-body">
       <ol>
-        <li>Choose your difficulty level</li>
-        <li>Tap on the start button or any tile to start</li>
-        <li>Select two tiles to swap the characters to form idioms</li>
-        <li>Tap on the same tile to unselect</li>
+        <li>{{ "howto.point1" | translate}}</li>
+        <li>{{ "howto.point2" | translate}}</li>
+        <li>{{ "howto.point3" | translate}}</li>
+        <li>{{ "howto.point4" | translate}}</li>
       </ol>
     </div>
     <div class="modal-footer">
       <a class="btn btn-sm btn-dark mr-auto" target="_blank" href="https://github.com/jinyuan/chengyu">
-        <fa-icon [icon]="['fab','github']"></fa-icon> Github
+        <fa-icon [icon]="['fab','github']"></fa-icon>
+        Github
       </a>
     </div>
   </ng-template>
