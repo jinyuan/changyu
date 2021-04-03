@@ -6,8 +6,8 @@ import {GamePiece} from "../models/GamePiece";
 import {Difficulty} from "../models/Difficulty";
 import {faClipboard, faInfoCircle, faPlay, faStopwatch, faSyncAlt} from "@fortawesome/free-solid-svg-icons";
 import {FaIconLibrary} from "@fortawesome/angular-fontawesome";
-import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
-import { faGithub } from "@fortawesome/free-brands-svg-icons";
+import {faGithub} from "@fortawesome/free-brands-svg-icons";
+import {BsModalService, BsModalRef} from 'ngx-bootstrap/modal';
 import {ActivatedRoute} from "@angular/router";
 import {TranslateService} from "@ngx-translate/core";
 
@@ -24,13 +24,13 @@ export class GameboardComponent implements OnInit, AfterViewInit{
               private route: ActivatedRoute,
               private translate: TranslateService
               ) {
-
     library.addIcons(
       faStopwatch,
       faClipboard,
       faPlay,
       faSyncAlt,
       faInfoCircle,
+      faGithub,
     );
     this.selectedLang = translate.getBrowserLang();
     translate.setDefaultLang(this.selectedLang);
