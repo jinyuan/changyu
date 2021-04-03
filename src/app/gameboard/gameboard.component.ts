@@ -4,10 +4,10 @@ import {IdiomsService} from "../providers/idioms.service";
 import {interval, Subscription} from "rxjs";
 import {GamePiece} from "../models/GamePiece";
 import {Difficulty} from "../models/Difficulty";
-import {faClipboard, faInfo, faInfoCircle, faPlay, faStopwatch, faSyncAlt} from "@fortawesome/free-solid-svg-icons";
+import {faClipboard, faInfoCircle, faPlay, faStopwatch, faSyncAlt} from "@fortawesome/free-solid-svg-icons";
 import {FaIconLibrary} from "@fortawesome/angular-fontawesome";
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
-import {faGithub} from "@fortawesome/free-brands-svg-icons";
+import { faGithub } from "@fortawesome/free-brands-svg-icons";
 import {ActivatedRoute} from "@angular/router";
 import {TranslateService} from "@ngx-translate/core";
 
@@ -24,10 +24,10 @@ export class GameboardComponent implements OnInit, AfterViewInit{
               private route: ActivatedRoute,
               private translate: TranslateService
               ) {
+
     library.addIcons(
       faStopwatch,
       faClipboard,
-      faGithub,
       faPlay,
       faSyncAlt,
       faInfoCircle,
